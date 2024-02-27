@@ -11,7 +11,6 @@ const Share = ({ id }) => {
   const [completed, setCompleted] = useState(0);
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
