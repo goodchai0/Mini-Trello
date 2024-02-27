@@ -4,7 +4,6 @@ import greydot from '../../assets/greydot.png';
 import bluedot from '../../assets/bluedot.png';
 import reddot from '../../assets/reddot.png';
 import { getTask } from '../../apis/task';
-import { useNavigate } from "react-router";
 
 const Share = ({ id }) => {
   console.log({ id });
@@ -13,12 +12,7 @@ const Share = ({ id }) => {
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-          navigate("/login");
-      }
-  }, []);
+
   useEffect(() => {
     const fetchTasks = async () => {
       let task = await getTask({id});
