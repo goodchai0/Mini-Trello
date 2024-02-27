@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styles from "./Analytics.module.css";
 import neondot from '../../assets/neondot.png';
 import { analytics } from "../../apis/task";
+import { useNavigate } from "react-router";
 
 export const Analytics = () => {
   const [data, setData] = useState({}); // Initialize state
-
+  const navigate = useNavigate();
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+          navigate("/login");
+      }
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       const result = await analytics(); // Call the API

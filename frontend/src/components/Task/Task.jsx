@@ -4,6 +4,7 @@ import greydot from '../../assets/greydot.png';
 import bluedot from '../../assets/bluedot.png';
 import reddot from '../../assets/reddot.png';
 import Delete from '../../assets/Delete.png';
+import { useNavigate } from "react-router";
 
 import { updateTask,updateCompletedChecklist, deleteTask } from "../../apis/task";
 
@@ -18,6 +19,15 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
 
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);  // // To update the state, you can do:
   const [selectedPriority, setSelectedPriority] = useState(task.priority);
+
+
+  const navigate = useNavigate();
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+          navigate("/login");
+      }
+  }, []);
 
   const openModal = () => {
     setModalIsOpen(true);

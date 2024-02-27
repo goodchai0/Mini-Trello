@@ -8,6 +8,7 @@ import greydot from '../../assets/greydot.png';
 import bluedot from '../../assets/bluedot.png';
 import reddot from '../../assets/reddot.png';
 import { createTask,filterTask,getAllTasks } from "../../apis/task";
+import { useNavigate } from "react-router";
 
 import { Task } from '../Task/Task';
 
@@ -33,6 +34,13 @@ export const Home = () => {
     setSelectedPriority(priority);
   };
 
+  const navigate = useNavigate();
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+          navigate("/login");
+      }
+  }, []);
   const handleChange = async (event) => {
     setSelectedPeriod(event.target.value);
     console.log(event.target.value)
