@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from "./Setting.module.css";
 import password from '../../assets/password.png';
 import eye from '../../assets/eye.png';
