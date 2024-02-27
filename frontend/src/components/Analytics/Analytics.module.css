@@ -1,0 +1,27 @@
+.header{
+    font-weight: 1000;
+    font-style: unset;
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem 1rem 3rem 0rem;
+}
+.stat_box_container{
+    display: flex;
+    font-style: unset;
+    font-weight: 1000;
+    font-size: small;
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem 1rem 3rem 0rem;
+}
+.stat_box{
+    margin: 1rem 2rem 2rem 0rem;
+    background-color:  #F9FCFF;
+    padding: 2rem;
+    width: 22vw;
+}
+.stat_box div{
+    display: flex;
+    justify-content: space-between;
+}
+.stat_box h3{
+    margin: 0.7rem 1rem 0.7rem 1rem;
+}

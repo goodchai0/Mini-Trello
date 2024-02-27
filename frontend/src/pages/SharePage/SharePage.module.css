@@ -1,0 +1,19 @@
+.header{
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    font-weight: 1000;
+    font-style: unset;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header img{
+    margin-right: 0.6rem
+}
+.share_task_box{
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}

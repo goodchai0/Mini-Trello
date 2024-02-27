@@ -1,0 +1,126 @@
+.right_up{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    /* justify-content: center; */
+    align-items: center;
+    margin-left: 1rem;
+}
+.right_up img{
+    margin-right: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+.right_up h5 {
+    /* margin-bottom: 5rem; */
+    font-weight: 1000;
+    font-style: unset;
+    font-family: 'Poppins', sans-serif;
+}
+.options_master{
+    margin-left: -3rem;
+    /* margin-left: 1rem; */
+    border-left:4rem;
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+    align-items: center;
+    margin:1px;
+    padding-left: 5rem;
+
+}
+.options img{
+    height: 1.2rem;
+    margin-right: 18px;
+    justify-content: center;
+}
+.options h5{
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.logout{
+    position: end;
+    display: flex;
+    /* height: 20rem; */
+    position: fixed;
+    bottom:2rem;
+    margin-left: 3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100
+}
+.logout img{
+    margin-right: 18px;
+    justify-content: center;
+    max-width: 1rem;
+    max-height: 1rem;
+    margin-top: 2px;
+}
+.logout h5{
+    margin-top: 0px;
+    color:#CF3636;
+    
+}
+.selected {
+    color: black; /* Set text color to black */
+    background: #4391ED1A;
+
+  }
+  
+  .selected img {
+    filter: grayscale(0%); /* Remove grayscale filter for the image */
+  }
+  
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  .modal_button_yes{
+
+      width: 40%;
+      /* height: 28px; */
+      padding: 8px;
+      font-size: 20px;
+      background: #17A2B8;
+      box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.01);
+      border-radius: 10px;
+      color: white;
+      border: none;
+      font-weight: 500;
+      margin-bottom: 1px;
+      margin-top: 1rem;
+      width: inherit;
+  
+  }
+
+  .modal_button_no{
+
+    width: 40%;
+    /* height: 28px; */
+    padding: 8px;
+    font-size: 20px;
+    background: #ffffff;
+    box-shadow: 0px 0px 0px 4px rgba(167, 3, 3, 0.01);
+    border-radius: 10px;
+    color: rgb(255, 0, 0);
+    border: 1px solid red;
+    font-weight: 500;
+    margin-bottom: 1px;
+    margin-top: 1rem;
+    width: inherit;
+
+} 

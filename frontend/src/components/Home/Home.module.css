@@ -1,0 +1,298 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 1000;
+    font-style: unset;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    height: 5vh;
+}
+.selectedPeriod{
+  margin: 1rem 1rem 1rem 1rem;
+  outline:none
+}
+.selectedPeriod option{
+  margin: 1rem;
+  padding:1rem;
+  outline:none;
+  border:1px solid white;
+}
+
+.header h3{
+    padding: 1rem;
+    color:#707070;
+    font-size: 15px;
+}
+.header h2{
+    font-size: 20px;
+}
+.tasks{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* margin-bottom: 1rem; */
+}
+select {
+    border: none;
+    height: 1rem;
+    margin-top: 2.5rem;
+    /* justify-content: center;
+    display: flex;
+    align-items: center; */
+}
+.board_details{
+    font-weight: 1000;
+    font-style: unset;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+.task{
+    width: 20rem;
+    height: 73vh;
+    background-color:#EEF2F5;
+    padding: 15px 1px 15px 15px;
+    margin-right: 2rem;
+    border-radius: 5px;
+    margin-bottom:27px
+}
+.task_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.5rem;
+    border-radius: 1rem;
+}
+.task_header img{
+    height: 1rem;
+    margin-right: 2rem;
+}
+.task_div {
+    margin:1rem 0.5rem 2rem 0rem;
+    /* max-height:50vh; */
+    overflow-y: auto; /* Enable vertical scrolling */
+    width: 18rem;
+   
+}
+.task_box{
+    margin: 15px 0px 15px 0px;
+}
+/* Home.module.css */
+
+
+
+
+
+.task_div {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 220px); /* Adjust height as needed */
+}
+  
+  /* Style for the scrollbar */
+  .task_div::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+  
+  /* Style for the scrollbar track */
+  .task_div::-webkit-scrollbar-track {
+    background: #aac6db; /* Color of the scrollbar track */
+
+  }
+  
+  /* Style for the scrollbar handle */
+  .task_div::-webkit-scrollbar-thumb {
+    background: #8DAAB9CC; /* Color of the scrollbar handle */
+    border-radius: 15px; /* Rounded corners */
+  }
+  
+  /* Style for the scrollbar handle on hover */
+  .task_div::-webkit-scrollbar-thumb:hover {
+    background: #2373b0; /* Color of the scrollbar handle on hover */
+  }
+
+  .tasks {
+    overflow-x: auto; /* Enable vertical scrolling */
+    overflow-y:hidden ;
+    max-height: calc(87vh); 
+}
+  /* Style for the scrollbar */
+  .tasks::-webkit-scrollbar {
+    height: 10px;
+  }
+  
+  /* Style for the scrollbar track */
+  .tasks::-webkit-scrollbar-track {
+    background: #aac6db; /* Color of the scrollbar track */
+  }
+  
+  /* Style for the scrollbar handle */
+  .tasks::-webkit-scrollbar-thumb {
+    background: #8DAAB9CC;/* Color of the scrollbar handle */
+    border-radius:12rem; /* Rounded corners */
+  }
+  
+  /* Style for the scrollbar handle on hover */
+  .tasks::-webkit-scrollbar-thumb:hover {
+    background: #2373b0; /* Color of the scrollbar handle on hover */
+  }
+  
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 30vw;
+  }
+  
+  .blur {
+    filter: blur(5px);
+  }
+
+  .modal h3{
+    font-style: unset;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .modal .title{
+    width:100%;
+    padding: 8px;
+    border: 2px solid#4D40551A;
+    border-radius: 0.4rem;
+  }
+  
+  .modal .priority_box{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0px 1rem 0px;
+  }
+  .modal .priority_box h3{
+   margin-right: -14px;
+  } 
+  .modal .priority_box .priority button{
+    margin-left: 0.7rem;
+    padding: 2px 8px 2px 8px;
+    /* background-color: white; */
+    border-radius: 4px;
+    border-color: #4D40551A;
+    color: #767575;
+    font-size: small;
+  }
+  .checklist_box{
+    height: 15rem;
+    overflow-y: auto;
+    /* max-height: 20vh; */
+  }
+  .checklist_button{
+    background-color: white;
+    border-radius: 4px;
+    border-color: white;
+    color:  #767575;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    box-shadow: white;
+  }
+  
+  .checklist_input{
+    width:75%;
+    padding: 8px;
+    border: 2px solid white;
+    border-radius: 0.2rem;
+    margin: 3px;
+    outline: none;
+
+  }
+  .checklist_input:focus {
+    border: 2px solid white; /* Change this to the color you want */
+}
+  .checklist_cross_button{
+    padding: 8px;
+    border: 2px solid white;
+    border-radius: 0.2rem;
+    background-color: white;
+  }
+  .checklist_field_box{
+    border: 1px solid #4D40551A;
+    padding: 0rem 0rem 0rem 12px;
+    margin-bottom:8px;
+    border-radius: 0.5rem;
+  }
+  .modal .footer{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dueDate_button{
+    background-color: white;
+    border-radius: 10px;
+    border:2px solid #E2E2E2;
+    color:  #767575;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  .cancel_button{
+    background-color: white;
+    border-radius: 10px;
+    border:2px solid rgb(250, 66, 66);
+    color:  rgb(250, 66, 66);
+    padding: 0.5rem 0rem 0.5rem 2.5rem;
+    box-shadow: white;
+    margin-right: 10px;
+    width: 5rem;
+  }
+  .save_button{
+    background-color:  #17A2B8;
+    border-radius: 10px;
+    color:  rgb(255, 255, 255);
+    padding: 0.5rem 0rem 0.5rem 2.5rem;
+    box-shadow: white;
+    width: 5rem;
+  }
+  .cancel_save{
+    display: flex;
+  }
+  .footer input{
+    padding: 0.5rem 1rem 0.7rem 1rem;
+    border-radius: 10px;
+    border:2px solid #E2E2E2;
+    color:  #767575;
+  }
+  .selected {
+    background-color: #EEECEC;
+  }
+  .unselected {
+    background-color:white
+  }
+  
+  
+
+
+  .checklist_box {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 220px); /* Adjust height as needed */
+}
+  
+  /* Style for the scrollbar */
+  .checklist_box::-webkit-scrollbar {
+    width: 6px; /* Width of the scrollbar */
+  }
+  
+  /* Style for the scrollbar track */
+  .checklist_box::-webkit-scrollbar-track {
+    background: #aac6db; /* Color of the scrollbar track */
+
+  }
+  
+  /* Style for the scrollbar handle */
+  .checklist_box::-webkit-scrollbar-thumb {
+    background: #8DAAB9CC; /* Color of the scrollbar handle */
+    border-radius: 15px; /* Rounded corners */
+  }
+  
+  /* Style for the scrollbar handle on hover */
+  .checklist_box::-webkit-scrollbar-thumb:hover {
+    background: #2373b0; /* Color of the scrollbar handle on hover */
+  }
