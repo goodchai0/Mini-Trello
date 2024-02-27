@@ -1,5 +1,5 @@
 import axios from "axios";
-const backendUrl = "http://localhost:3000/api/v1";
+const backendUrl = "https://promanager-production.up.railway.app/api/v1";
 
 export const createTask = async (task) => {
     try {
