@@ -72,6 +72,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
 
 
   const handleShareClick = () => {
+    toggleOptions()
     const url = window.location.href + task._id;
     navigator.clipboard.writeText(url);
   
@@ -100,6 +101,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
   
 
   const handleDeleteClick = () => {
+    toggleOptions();
     setConfirmDelete(true);
   };
   
@@ -157,7 +159,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
         <h4 onClick={toggleOptions}>. . .</h4>
         {showOptions && (
           <div className={styles.options_box}>
-            <p onClick={() => setModalIsOpen(true)}>Edit</p>
+            <p onClick={() => { setModalIsOpen(true); toggleOptions(); }}>Edit</p>
             <p onClick={handleShareClick}>Share</p>
             <p className={styles.delete} onClick={handleDeleteClick}>Delete</p>
           </div>
