@@ -49,11 +49,16 @@ const Share = ({ id }) => {
         <div className={`${styles.checklist_items}`}>
           {items.map((item, index) => (
             <div key={index} className={styles.item}>
-              <input 
-                type="checkbox" 
-                checked={item.completed} 
-              />
-              <label>{item.label}</label>
+              <label className={styles.checkboxContainer}>
+                    <input 
+                      type="checkbox" 
+                      checked={item.completed} 
+                      onChange={() => handleCheckboxChange(index)}
+                      className={styles.hiddenCheckbox}
+                    />
+                    <span className={styles.customCheckbox}></span>
+                    {item.label}
+                  </label>
             </div>
           ))}
         </div>

@@ -6,7 +6,8 @@ import email from '../../assets/email.png';
 import password from '../../assets/password.png';
 import eye from '../../assets/eye.png';
 import man from '../../assets/man.png';
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -26,14 +27,15 @@ const Register = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!data.name || !data.email || !data.password || !data.confirm_password) { // Check all fields
-            alert("Please fill in all fields.");
+            toast.error("Please fill in all fields.");
             return;
         }
         if (data.confirm_password !== data.password) { // Check password confirmation
-            alert("Confirm password and password don't match.");
+            toast.error("Confirm password and password don't match.");
             return;
         }
         
+
         let response = await registerUser({ ...data });
         console.log(response)
         if (response.success) {
@@ -41,6 +43,9 @@ const Register = () => {
             localStorage.setItem("token", response.token);
             localStorage.setItem("userName", response.name);
             navigate("/"); // Redirect to home page after successful registration
+        }
+        else  if (!response.success){
+           console.log(response.message);toast.error(response.message)
         }
     };
 

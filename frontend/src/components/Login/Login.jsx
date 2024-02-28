@@ -5,6 +5,8 @@ import { loginUser } from "../../apis/auth";
 import email from '../../assets/email.png';
 import password from '../../assets/password.png';
 import eye from '../../assets/eye.png';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -19,8 +21,9 @@ export const Login = () => {
         event.preventDefault();
 
         let response = await loginUser({ ...data });
-        console.log(response)
+        console.log(response.data)
         if(response.success){
+            toast.success("Logged In")
             if (response.data) {
                 response=response.data;
                 localStorage.setItem("token", response.token);
@@ -29,7 +32,7 @@ export const Login = () => {
             }
             return;
         }
-        else {console.log(response.message);alert(response.message)}
+        else{console.log(response.message);toast.error(response.message)}
     };
 
     return (

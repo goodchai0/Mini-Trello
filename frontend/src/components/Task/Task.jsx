@@ -5,10 +5,11 @@ import bluedot from '../../assets/bluedot.png';
 import reddot from '../../assets/reddot.png';
 import Delete from '../../assets/Delete.png';
 import { useNavigate } from "react-router";
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { updateTask,updateCompletedChecklist, deleteTask } from "../../apis/task";
 
-export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => {
+export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) => {
   const [task, setTask] = useState({...initialTask});
   const [showCopied, setShowCopied] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -40,20 +41,27 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
   const editTask = async () => {
     // Check if any required fields are empty
     if (!task.name || !task.priority) {
-      alert('Please fill in all required fields.');
+      toast.error('Please fill in all required fields.');
       return;
     }
     // Check if any required fields are empty
     if (task.checklist.length === 0 || task.checklist[0].label === "") {
-      alert('Checklist should not be empty.');
+      toast.error('Checklist should not be empty.');
       return;
     }
     const response = await updateTask({id:task._id, body:{...task}});
-    setReload(!reload)
 
+    if (response.success) {
+      toast.success("Task Updated Successfully");
+    } else {
+        toast.error("Failed to Update task");
+        return;
+    }
     // Handle the response here
     console.log({response});
     console.log(task)
+
+    setReload(!reload)
     closeModal();
   };
   const handlePriorityClick = (priority) => {
@@ -75,11 +83,21 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
   };
   const removeTask = async () => {
     const response = await deleteTask({id:task._id});
-    setReload(!reload)
-      // Reload the page
-    window.location.reload();
-    console.log({response});
+    if(response.success){
+      toast.success("Task Deleted Successfully")
+      setReload(!reload)
+      // Reload the page after 1.5 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+      console.log({response});
+    }
+    else {
+      console.log(response.message);
+      toast.error("Task Delete Failed")
+    }
   };
+  
 
   const handleDeleteClick = () => {
     setConfirmDelete(true);
@@ -113,22 +131,24 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
   const handleCheckboxChange = async (index) => {
     const newItems = [...items];
     newItems[index].completed = !newItems[index].completed;
+    setItems(newItems);
 
     // Call your API to update the checklist
     const response = await updateCompletedChecklist({checklist:newItems,id:task._id}); // replace with your actual API call
 
     // If the API call was successful, update the state
     if (response.success) {
+      console.log("Hi")
       console.log(response.success)
       console.log(newItems)
-      setItems(newItems);
     }
+    else { console.log("HI"); toast.error("Checklist not updated")}
   };
 
   
   useEffect(() => {
     setShowChecklist(false);
-  }, [toggle]);
+  }, [toggling]);
   
   return (
     <div className={styles.main}>
@@ -153,16 +173,21 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
 
         
           <div className={`${styles.checklist_items} ${showChecklist ? styles.show : ''}`}>
-          {items.map((item, index) => (
-            <div key={index} className={styles.item}>
-              <input 
-                type="checkbox" 
-                checked={item.completed} 
-                onChange={() => handleCheckboxChange(index)}
-              />
-              <label>{item.label}</label>
-            </div>
-          ))}
+                {items.map((item, index) => (
+                <div key={index} className={styles.item}>
+                  <label className={styles.checkboxContainer}>
+                    <input 
+                      type="checkbox" 
+                      checked={item.completed} 
+                      onChange={() => handleCheckboxChange(index)}
+                      className={styles.hiddenCheckbox}
+                    />
+                    <span className={styles.customCheckbox}></span>
+                    {item.label}
+                  </label>
+                </div>
+              ))}
+
         </div>
        
        <div className={styles.footer}>
@@ -181,7 +206,6 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
 
        </div>
       </div>
-
       {modalIsOpen && (
       <div className={styles.modal}>
         <h3>Title<span style={{color:"red"}}>*</span></h3>
@@ -219,7 +243,10 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
         <h3>Checklist<span style={{color:"red"}}>*</span></h3>
         {task.checklist.map((item, index) => (
           <div key={index} className={styles.checklist_field_box}>
+            <label className={styles.checkboxContainer}>
+
             <input
+                className={styles.hiddenCheckbox}
               type="checkbox"
               checked={item.completed}
               onChange={e => {
@@ -227,7 +254,9 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
                 newChecklist[index].completed = e.target.checked;
                 setTask(prevState => ({ ...prevState, checklist: newChecklist }));
               }}
+
             />
+            <span className={styles.customCheckbox} style={{marginTop:"-1rem",marginLeft:"0.7em"}}></span></label>
             <input
               type="text"
               value={item.label}
@@ -286,7 +315,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggle}) => 
         Copied
       </div>
     )}
-
+    {/* <ToastContainer /> */}
     </div>
   );
 };

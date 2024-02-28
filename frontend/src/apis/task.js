@@ -1,8 +1,8 @@
 import axios from "axios";
-const backendUrl = "https://promanager-production.up.railway.app/api/v1";
+// const backendUrl = "https://promanager-production.up.railway.app/api/v1";
+const backendUrl = "http://localhost:3000/api/v1";
 
 export const createTask = async (task) => {
-    try {
         const reqUrl = `${backendUrl}/task/tasks`;
         const reqPayload = task;
         const token = localStorage.getItem('token'); // Replace 'token' with the key you used to store the token
@@ -12,11 +12,6 @@ export const createTask = async (task) => {
             }
         });
         return response.data;
-    } catch (error) {
-        console.log(error);
-        alert("Task not created")
-        // toast with custom message for clients
-    }
 };
 
 
@@ -51,7 +46,7 @@ export const getTask = async ({ id }) => {
 };
 
 export const updateTask = async (item) => {
-    try {
+    try{
         console.log(item)
         const reqUrl = `${backendUrl}/task/tasks/${item.id}`;
         const token = localStorage.getItem('token'); // Replace 'token' with the key you used to store the token
@@ -61,17 +56,14 @@ export const updateTask = async (item) => {
             }
         });
         return response.data;
-    } catch (error) {
-        console.log(error);
-        alert("Cannot the update the task")
-
-        // toast with custom message for clients
-    }
+        } catch (error) {
+            console.error("Error occurred:", error);
+            return { success: false, message: "Check your checklist items"};
+        }
 };
 
 export const updateCompletedChecklist = async (item) => {
-    try {
-        console.log(item)
+    try{
         const reqUrl = `${backendUrl}/task/tasks/${item.id}/checklist`;
         const token = localStorage.getItem('token'); // Replace 'token' with the key you used to store the token
         const response = await axios.put(reqUrl,item.checklist, {
@@ -79,13 +71,10 @@ export const updateCompletedChecklist = async (item) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log(response.data)
         return response.data;
     } catch (error) {
-        console.log(error);
-        alert("Cannot the update the checklist")
-
-        // toast with custom message for clients
+        console.error("Error occurred:", error);
+        return { success: false, message: "Check your checklist items"};
     }
 };
 
@@ -134,7 +123,6 @@ export const filterTask = async (filter) => {
 };
 
 export const deleteTask = async ({id}) => {
-    try {
         const reqUrl = `${backendUrl}/task/tasks/${id}`;
         const token = localStorage.getItem('token'); // Replace 'token' with the key you used to store the token
         const response = await axios.delete(reqUrl, {
@@ -143,10 +131,4 @@ export const deleteTask = async ({id}) => {
             }
         });
         return response.data;
-    } catch (error) {
-        console.log(error);
-        alert("Cannot the delete the tasks")
-
-        // toast with custom message for clients
-    }
 };

@@ -7,7 +7,7 @@ const registerUser = async (req, res, next) => {
         const { name, password, email } = req.body;
 
         if (!name || !email || !password) {
-            return res.status(400).json({success:false,
+            return res.status(400).send({success:false,
                 message: "Bad request",
             });
         }
@@ -16,7 +16,7 @@ const registerUser = async (req, res, next) => {
         if (isExistingUser) {
             return res
                 .status(409)
-                .json({success:false, message: "User already exists" });
+                .send({success:false, message: "User already exists" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -34,7 +34,7 @@ const registerUser = async (req, res, next) => {
             process.env.SECRET_KEY
         );
 
-        res.json({success:true, data:{
+        res.send({success:true, data:{
             message: "User registered",
             name: userDetails.name,
             token
@@ -49,7 +49,7 @@ const loginUser = async (req, res, next) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({success:false,
+            return res.status(400).send({success:false,
                 errorMessage: "Bad Request! Invalid credentials",
             });
         }
@@ -59,7 +59,7 @@ const loginUser = async (req, res, next) => {
         if (!userDetails) {
             return res
                 .status(401)
-                .json({success:false, message: "Invalid credentials" });
+                .send({success:false, message: "Invalid credentials" });
         }
 
         const passwordMatch = await bcrypt.compare(
@@ -70,7 +70,7 @@ const loginUser = async (req, res, next) => {
         if (!passwordMatch) {
             return res
                 .status(401)
-                .json({success:false, message: "Invalid credentials" });
+                .send({success:false, message: "Invalid credentials" });
         }
 
         const token = jwt.sign(
@@ -80,7 +80,7 @@ const loginUser = async (req, res, next) => {
 
         res.cookie("token", token, { httpOnly: true });
 
-        res.json({success:true,data:{
+        res.send({success:true,data:{
             message: "User logged in",
             name: userDetails.name,
             token

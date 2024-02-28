@@ -9,7 +9,8 @@ import bluedot from '../../assets/bluedot.png';
 import reddot from '../../assets/reddot.png';
 import { createTask,filterTask,getAllTasks } from "../../apis/task";
 import { useNavigate } from "react-router";
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { Task } from '../Task/Task';
 
 
@@ -20,6 +21,18 @@ export const Home = () => {
   const [toggle2, setToggle2] = useState(false);
   const [toggle3, setToggle3] = useState(false);
   const [toggle4, setToggle4] = useState(false);
+  const toggleFunction1 = () => {
+    setToggle1(!toggle1);
+  };
+  const toggleFunction2 = () => {
+    setToggle2(!toggle2);
+  };
+  const toggleFunction3 = () => {
+    setToggle3(!toggle3);
+  };
+  const toggleFunction4 = () => {
+    setToggle4(!toggle4);
+  };
   const [task, setTask] = useState({
     name: '',
     priority: '',
@@ -62,19 +75,24 @@ export const Home = () => {
   const saveTask = async () => {
     // Check if any required fields are empty
     if (!task.name || !task.priority) {
-      alert('Please fill in all required fields.');
+      toast.error('Please fill in all required fields.');
       return;
     }
     // Check if any required fields are empty
     if (task.checklist.length === 0 || task.checklist[0].label === "") {
-      alert('Checklist should not be empty.');
+      toast.error('Checklist should not be empty.');
       return;
     }
 
   
     // Call your API function here
     const response = await createTask(task);
-  
+    console.log(response)
+    if (response.success) {
+      toast.success("Task Created Successfully");
+    } else {
+        toast.error("Failed to create task");
+    }
     // Handle the response here
     console.log({response});
     console.log(task)
@@ -127,7 +145,7 @@ export const Home = () => {
                   checklistItems={task.checklist}
                   setReload={setReload}// replace with your actual handler
                   reload={reload}
-                  toggle={toggle1}
+                  toggling={toggleFunction1}
                 />
               );
             }
@@ -149,7 +167,7 @@ export const Home = () => {
                   checklistItems={task.checklist}
                   setReload={setReload} // replace with your actual handler
                   reload={reload}
-                  toggle={toggle2}
+                  toggling={toggleFunction2}
                 />
               );
             }
@@ -173,7 +191,7 @@ export const Home = () => {
                     checklistItems={task.checklist}
                     setReload={setReload} // replace with your actual handler
                     reload={reload}
-                    toggle={toggle3}
+                    toggling={toggleFunction3}
                   />
                 );
               }
@@ -196,7 +214,7 @@ export const Home = () => {
                   checklistItems={task.checklist}
                   setReload={setReload} 
                   reload={reload}
-                  toggle={toggle4}
+                  toggling={toggleFunction4}
                 />
               );
             }
@@ -206,6 +224,7 @@ export const Home = () => {
         </div>
       </div>
     </div>
+    
     {modalIsOpen && (
       <div className={styles.modal}>
         <h3>Title<span style={{color:"red"}}>*</span></h3>
@@ -243,15 +262,20 @@ export const Home = () => {
         <h3>Checklist<span style={{color:"red"}}>*</span></h3>
         {task.checklist.map((item, index) => (
           <div key={index} className={styles.checklist_field_box}>
-            <input
-              type="checkbox"
-              checked={item.completed}
-              onChange={e => {
-                const newChecklist = [...task.checklist];
-                newChecklist[index].completed = e.target.checked;
-                setTask(prevState => ({ ...prevState, checklist: newChecklist }));
-              }}
-            />
+            <label className={styles.checkboxContainer}>
+
+<input
+    className={styles.hiddenCheckbox}
+  type="checkbox"
+  checked={item.completed}
+  onChange={e => {
+    const newChecklist = [...task.checklist];
+    newChecklist[index].completed = e.target.checked;
+    setTask(prevState => ({ ...prevState, checklist: newChecklist }));
+  }}
+
+/>
+<span className={styles.customCheckbox} style={{marginTop:"-1rem",marginLeft:"0.5rem"}}></span></label>
             <input
               type="text"
               value={item.label}

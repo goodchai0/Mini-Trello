@@ -6,7 +6,7 @@ exports.createTask = async (req, res) => {
         console.log(req.body)
         const task = new Task({...req.body,created_by:req.userId});
         await task.save();
-        res.status(201).send(task);
+        res.status(201).send({success:true,data:task});
     } catch (error) {
         res.status(400).send(error);
     }
@@ -55,7 +55,7 @@ exports.updateTask = async (req, res) => {
             return res.status(404).send({ message: 'Task not found' });
         }
         console.log(task)
-        res.send(task);
+        res.send({success:true,data:task});
     } catch (error) {
         res.status(400).send(error);
     }
@@ -71,7 +71,7 @@ exports.updateChecklistItemStatus = async (req, res) => {
         task.checklist=req.body;
 
         await task.save();
-        res.send({success:true,task});
+        res.send({success:true,data:task});
     } catch (error) {
         res.status(400).send(error);
     }
@@ -181,7 +181,7 @@ exports.deleteTask = async (req, res) => {
         return res.status(404).send();
       }
   
-      res.send(task);
+      res.send({success:true,data:task});
     } catch (e) {
       res.status(500).send();
     }

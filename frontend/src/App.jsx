@@ -7,11 +7,13 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { AnalyticsPage } from "./pages/AnalyticsPage/AnalyticsPage";
 import { Settings } from "./pages/Settings/Settings";
 import { SharePage } from './pages/SharePage/SharePage';
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
 
   return (
     <>
+    <ToastContainer />
         <BrowserRouter>
             <Routes>
                 <Route path="/register" element={<RegisterPage />} />

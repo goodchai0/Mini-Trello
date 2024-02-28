@@ -1,31 +1,36 @@
 import axios from "axios";
-const backendUrl = "https://promanager-production.up.railway.app/api/v1";
+// const backendUrl = "https://promanager-production.up.railway.app/api/v1";
+const backendUrl = "http://localhost:3000/api/v1";
+
 
 export const registerUser = async ({ name, email, mobile, password }) => {
-    try {
+        try {
+
         const reqUrl = `${backendUrl}/auth/register`;
         const reqPayload = { name, email, mobile, password };
         const response = await axios.post(reqUrl, reqPayload);
         return response.data;
-    } catch (error) {
-        alert("Registration Failed!");
-        // toast with custom message for clients
-    }
-};
+        } catch (error) {
+                console.error("Error occurred:", error);
+                return { success: false, message: "Check your informations"};
+        }
+        };
 
 export const loginUser = async ({ email, password }) => {
-    try {
         const reqUrl = `${backendUrl}/auth/login`;
         const reqPayload = { email, password };
-        const response = await axios.post(reqUrl, reqPayload);
-        return response.data;
-    } catch (error) {
-        alert("Check your account details!");
-    }
-};
+    
+        try {
+            const response = await axios.post(reqUrl, reqPayload);
+            console.log({response});
+            return response.data;
+        } catch (error) {
+            console.error("Error occurred:", error);
+            return { success: false, message: "Check your credentials"};
+        }
+    };
 
 export const updateUser = async ({ name, oldPassword, newPassword }) => {
-    try {
         const reqUrl = `${backendUrl}/auth/update`;
         const reqPayload = { name, oldPassword, newPassword };
         const token = localStorage.getItem('token');
@@ -36,7 +41,4 @@ export const updateUser = async ({ name, oldPassword, newPassword }) => {
         });
         console.log(response.data)
         return response.data;
-    } catch (error) {
-        alert("Check the detials");
-    }
 };

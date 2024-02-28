@@ -296,3 +296,64 @@ select {
   .checklist_box::-webkit-scrollbar-thumb:hover {
     background: #2373b0; /* Color of the scrollbar handle on hover */
   }
+
+
+
+
+
+
+
+
+
+
+  
+  .hiddenCheckbox {
+    display: none;
+  }
+  
+  .checkboxContainer {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px ;
+    /* padding-right: 2rem; */
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .customCheckbox {
+    position: absolute;
+    top: 0;
+    left: -7px;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 5px;
+
+    border: 1px solid rgb(23, 162, 184);
+  }
+  
+  .checkboxContainer input:checked ~ .customCheckbox {
+    background-color: rgb(23, 162, 184);
+    border-radius: 5px;
+  }
+  
+  .customCheckbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .checkboxContainer input:checked ~ .customCheckbox:after {
+    display: block;
+  }
+  
+  .checkboxContainer .customCheckbox:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
