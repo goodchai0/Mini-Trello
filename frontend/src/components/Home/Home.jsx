@@ -145,7 +145,7 @@ export const Home = () => {
                   checklistItems={task.checklist}
                   setReload={setReload}// replace with your actual handler
                   reload={reload}
-                  toggling={toggleFunction1}
+                  toggling={toggle1}
                 />
               );
             }
@@ -167,7 +167,7 @@ export const Home = () => {
                   checklistItems={task.checklist}
                   setReload={setReload} // replace with your actual handler
                   reload={reload}
-                  toggling={toggleFunction2}
+                  toggling={toggle2}
                 />
               );
             }
@@ -191,7 +191,7 @@ export const Home = () => {
                     checklistItems={task.checklist}
                     setReload={setReload} // replace with your actual handler
                     reload={reload}
-                    toggling={toggleFunction3}
+                    toggling={toggle3}
                   />
                 );
               }
@@ -214,7 +214,7 @@ export const Home = () => {
                   checklistItems={task.checklist}
                   setReload={setReload} 
                   reload={reload}
-                  toggling={toggleFunction4}
+                  toggling={toggle4}
                 />
               );
             }
