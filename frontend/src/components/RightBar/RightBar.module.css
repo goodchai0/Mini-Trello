@@ -21,6 +21,7 @@
     margin-left: -3rem;
     /* margin-left: 1rem; */
     border-left:4rem;
+    cursor: pointer;
 }
 .options{
     display: flex;
@@ -30,6 +31,7 @@
     align-items: center;
     margin:1px;
     padding-left: 5rem;
+    color:  #707070;
 
 }
 .options img{
@@ -47,10 +49,11 @@
     display: flex;
     /* height: 20rem; */
     position: fixed;
-    bottom:2rem;
+    bottom:5rem;
     margin-left: 3rem;
     font-family: 'Poppins', sans-serif;
-    font-weight: 100
+    font-weight: 100;
+    cursor: pointer;
 }
 .logout img{
     margin-right: 18px;
@@ -70,9 +73,14 @@
 
   }
   
-  .selected img {
-    filter: grayscale(0%); /* Remove grayscale filter for the image */
-  }
+.selected img {
+    /* color: black; */
+}
+.selectedImage {
+    font-optical-sizing: 1rem;
+    color: black;
+}
+  
   
   .modal {
     position: fixed;
@@ -104,7 +112,7 @@
       margin-bottom: 1px;
       margin-top: 1rem;
       width: inherit;
-  
+      cursor: pointer;
   }
 
   .modal_button_no{
@@ -122,5 +130,5 @@
     margin-bottom: 1px;
     margin-top: 1rem;
     width: inherit;
-
+    cursor: pointer;
 } 

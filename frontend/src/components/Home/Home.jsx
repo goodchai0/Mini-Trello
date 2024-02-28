@@ -7,7 +7,7 @@ import Delete from '../../assets/Delete.png';
 import greydot from '../../assets/greydot.png';
 import bluedot from '../../assets/bluedot.png';
 import reddot from '../../assets/reddot.png';
-import { createTask,filterTask,getAllTasks } from "../../apis/task";
+import { createTask, filterTask, getAllTasks } from "../../apis/task";
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -49,10 +49,10 @@ export const Home = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-          navigate("/login");
-      }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
   }, []);
   const handleChange = async (event) => {
     setSelectedPeriod(event.target.value);
@@ -84,23 +84,23 @@ export const Home = () => {
       return;
     }
 
-  
+
     // Call your API function here
     const response = await createTask(task);
     console.log(response)
     if (response.success) {
       toast.success("Task Created Successfully");
     } else {
-        toast.error("Failed to create task");
+      toast.error("Failed to create task");
     }
     // Handle the response here
-    console.log({response});
+    console.log({ response });
     console.log(task)
     setReload(!reload)
     // Close the modal
     closeModal();
   };
-  
+
 
   const name = localStorage.getItem('userName')
 
@@ -112,86 +112,40 @@ export const Home = () => {
     };
 
     console.log("hi")
-    console.log({tasksFromDb})
+    console.log({ tasksFromDb })
     fetchTasks();
   }, [reload]);
 
   return (
     <>
-    <div className={styles.header}>
-    <h2>Welcome! {name}</h2>
-    <h3>{formatDate(Date.now())}</h3>
-    </div>
-    <div className={styles.board_details}>
-      <h1>Board</h1>
-      <select className={styles.selectedPeriod} value={selectedPeriod} onChange={handleChange}>
+      <div className={styles.header}>
+        <h2>Welcome! {name}</h2>
+        <h3>{formatDate(Date.now())}</h3>
+      </div>
+      <div className={styles.board_details}>
+        <h1>Board</h1>
+        <select className={styles.selectedPeriod} value={selectedPeriod} onChange={handleChange}>
           <option value="today">Today</option>
           <option value="week">This Week</option>
           <option value="month">This Month</option>
         </select>
-    </div>
+      </div>
 
-    <div className={modalIsOpen ? `${styles.tasks} ${styles.blur}` : styles.tasks}>      <div className={styles.task}>
-        <div className={styles.task_header}><h3>Backlog</h3><img src={Group} onClick={()=> setToggle1(!toggle1)}/></div>
-        <div className={styles.task_div}>
-        <div className={styles.task_box}>
-          {tasksFromDb.map((task) => {
-            if (task.status === 'backlog') {
-              return (
-                <Task
-                  key={task.id}
-                  initialTask={task}
-                  setTask={setTask}
-                  checklistItems={task.checklist}
-                  setReload={setReload}// replace with your actual handler
-                  reload={reload}
-                  toggling={toggle1}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-        </div>
-      </div>
-      <div className={styles.task}>
-        <div className={styles.task_header}><h3>To-Do</h3> <span><img src={add} onClick={openModal}/><img src={Group} onClick={()=> setToggle2(!toggle2)}/></span></div>
-        <div className={styles.task_div}>
-        <div className={styles.task_box}>
-          {tasksFromDb.map((task) => {
-            if (task.status === 'to-do') {
-              return (
-                <Task
-                  key={task.id}
-                  initialTask={task}
-                  checklistItems={task.checklist}
-                  setReload={setReload} // replace with your actual handler
-                  reload={reload}
-                  toggling={toggle2}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-        
-        
-        </div>
-      </div>
-      <div className={styles.task}>
-        <div className={styles.task_header}><h3>Progress</h3><img src={Group} onClick={()=> setToggle3(!toggle3)}/></div>
+      <div className={modalIsOpen ? `${styles.tasks} ${styles.blur}` : styles.tasks}>      <div className={styles.task}>
+        <div className={styles.task_header}><h3>Backlog</h3><img src={Group} onClick={() => setToggle1(!toggle1)} /></div>
         <div className={styles.task_div}>
           <div className={styles.task_box}>
             {tasksFromDb.map((task) => {
-              if (task.status === 'progress') {
+              if (task.status === 'backlog') {
                 return (
                   <Task
                     key={task.id}
                     initialTask={task}
+                    setTask={setTask}
                     checklistItems={task.checklist}
-                    setReload={setReload} // replace with your actual handler
+                    setReload={setReload}// replace with your actual handler
                     reload={reload}
-                    toggling={toggle3}
+                    toggling={toggle1}
                   />
                 );
               }
@@ -200,127 +154,173 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className={styles.task}>
-        <div className={styles.task_header}><h3>Done</h3><img src={Group} onClick={()=> setToggle4(!toggle4)}/></div>
-        <div className={styles.task_div}>
-        
-        <div className={styles.task_box}>
-          {tasksFromDb.map((task) => {
-            if (task.status === 'done') {
-              return (
-                <Task
-                  key={task.id}
-                  initialTask={task}
-                  checklistItems={task.checklist}
-                  setReload={setReload} 
-                  reload={reload}
-                  toggling={toggle4}
-                />
-              );
-            }
-            return null;
-          })}
+        <div className={styles.task}>
+          <div className={styles.task_header}><h3>To-Do</h3> <span><img src={add} onClick={openModal} /><img src={Group} onClick={() => setToggle2(!toggle2)} /></span></div>
+          <div className={styles.task_div}>
+            <div className={styles.task_box}>
+              {tasksFromDb.map((task) => {
+                if (task.status === 'to-do') {
+                  return (
+                    <Task
+                      key={task.id}
+                      initialTask={task}
+                      checklistItems={task.checklist}
+                      setReload={setReload} // replace with your actual handler
+                      reload={reload}
+                      toggling={toggle2}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </div>
+
+
+          </div>
         </div>
+        <div className={styles.task}>
+          <div className={styles.task_header}><h3>Progress</h3><img src={Group} onClick={() => setToggle3(!toggle3)} /></div>
+          <div className={styles.task_div}>
+            <div className={styles.task_box}>
+              {tasksFromDb.map((task) => {
+                if (task.status === 'progress') {
+                  return (
+                    <Task
+                      key={task.id}
+                      initialTask={task}
+                      checklistItems={task.checklist}
+                      setReload={setReload} // replace with your actual handler
+                      reload={reload}
+                      toggling={toggle3}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </div>
+          </div>
+        </div>
+        <div className={styles.task}>
+          <div className={styles.task_header}><h3>Done</h3><img src={Group} onClick={() => setToggle4(!toggle4)} /></div>
+          <div className={styles.task_div}>
+
+            <div className={styles.task_box}>
+              {tasksFromDb.map((task) => {
+                if (task.status === 'done') {
+                  return (
+                    <Task
+                      key={task.id}
+                      initialTask={task}
+                      checklistItems={task.checklist}
+                      setReload={setReload}
+                      reload={reload}
+                      toggling={toggle4}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    {modalIsOpen && (
-      <div className={styles.modal}>
-        <h3>Title<span style={{color:"red"}}>*</span></h3>
-        <input
-          className={styles.title}
-          type="text"
-          value={task.name}
-          onChange={e => setTask(prevState => ({ ...prevState, name: e.target.value }))}
-          placeholder="Enter Task Title"
-        />
-        <div className={styles.priority_box}>
-          <h3>Select Priority<span style={{color:"red"}}>*</span></h3>
-          <div className={styles.priority}>
-            <button
-              className={`${styles.priorityButton} ${selectedPriority === 'Low' ? styles.selected : styles.unselected}`}
-              onClick={() => handlePriorityClick('Low')}
-            >
-              <span><img src={greydot}/>    </span>Low Priority
-            </button>
-            <button
-              className={`${styles.priorityButton} ${selectedPriority === 'Moderate' ? styles.selected : styles.unselected}`}
-              onClick={() => handlePriorityClick('Moderate')}
-            >
-              <span><img src={bluedot}/>    </span>Moderate Priority
-            </button>
-            <button
-              className={`${styles.priorityButton} ${selectedPriority === 'High' ? styles.selected : styles.unselected}`}
-              onClick={() => handlePriorityClick('High')}
-            >
-              <span><img src={reddot}/>    </span>High Priority
-            </button>
-          </div>
-        </div>
-      <div className={styles.checklist_box}>
-        <h3>Checklist<span style={{color:"red"}}>*</span></h3>
-        {task.checklist.map((item, index) => (
-          <div key={index} className={styles.checklist_field_box}>
-            <label className={styles.checkboxContainer}>
 
-<input
-    className={styles.hiddenCheckbox}
-  type="checkbox"
-  checked={item.completed}
-  onChange={e => {
-    const newChecklist = [...task.checklist];
-    newChecklist[index].completed = e.target.checked;
-    setTask(prevState => ({ ...prevState, checklist: newChecklist }));
-  }}
-
-/>
-<span className={styles.customCheckbox} style={{marginTop:"-1rem",marginLeft:"0.5rem"}}></span></label>
-            <input
-              type="text"
-              value={item.label}
-              onChange={e => {
-                const newChecklist = [...task.checklist];
-                newChecklist[index].label = e.target.value;
-                setTask(prevState => ({ ...prevState, checklist: newChecklist }));
-              }}
-              className={styles.checklist_input}
-            />
-            <button className={styles.checklist_cross_button} onClick={() => {
-              const newChecklist = [...task.checklist];
-              newChecklist.splice(index, 1);
-              setTask(prevState => ({ ...prevState, checklist: newChecklist }));
-            }}><img src={Delete} style={{height:"1rem"}}/></button>
-          </div>
-        ))}
-
-
-        <div className={styles.checklist_button} onClick={() => setTask(prevState => ({ ...prevState, checklist: [...prevState.checklist, { label: '', completed: false }] }))}>
-          + Add New
-        </div>
-
-      </div>
-      <div className={styles.footer}>
-        <div className={styles.dueDate_button} onClick={() => {document.getElementById('dateInput').click();setDatePickerVisible(true);}}>
-        {task.due_date || 'Select Due Date'}
-          </div>
+      {modalIsOpen && (
+        <div className={styles.modal}>
+          <h3>Title<span style={{ color: "red" }}>*</span></h3>
           <input
-            id="dateInput"
-            type="date"
-            style={{ visibility: isDatePickerVisible ? 'visible' : 'hidden', position: 'absolute' }}
-            value={task.due_date}
-            onChange={e => {
-              setTask(prevState => ({ ...prevState, due_date: e.target.value }));
-              setDatePickerVisible(false);
-            }}
+            className={styles.title}
+            type="text"
+            value={task.name}
+            onChange={e => setTask(prevState => ({ ...prevState, name: e.target.value }))}
+            placeholder="Enter Task Title"
           />
-          <div className={styles.cancel_save}>
-            <div className={styles.cancel_button} onClick={closeModal}>Cancel</div>
-            <div className={styles.save_button} onClick={saveTask}>Save</div>
+          <div className={styles.priority_box}>
+            <h3>Select Priority<span style={{ color: "red" }}>*</span></h3>
+            <div className={styles.priority}>
+              <button
+                className={`${styles.priorityButton} ${selectedPriority === 'Low' ? styles.selected : styles.unselected}`}
+                onClick={() => handlePriorityClick('Low')}
+              >
+                <span><img src={greydot} />    </span>Low Priority
+              </button>
+              <button
+                className={`${styles.priorityButton} ${selectedPriority === 'Moderate' ? styles.selected : styles.unselected}`}
+                onClick={() => handlePriorityClick('Moderate')}
+              >
+                <span><img src={bluedot} />    </span>Moderate Priority
+              </button>
+              <button
+                className={`${styles.priorityButton} ${selectedPriority === 'High' ? styles.selected : styles.unselected}`}
+                onClick={() => handlePriorityClick('High')}
+              >
+                <span><img src={reddot} />    </span>High Priority
+              </button>
+            </div>
           </div>
-      </div>
-      </div>
-    )}
+          <div className={styles.checklist_box}>
+            <h3>Checklist<span style={{ color: "red" }}>*</span></h3>
+            {task.checklist.map((item, index) => (
+              <div key={index} className={styles.checklist_field_box}>
+                <label className={styles.checkboxContainer}>
+
+                  <input
+                    className={styles.hiddenCheckbox}
+                    type="checkbox"
+                    checked={item.completed}
+                    onChange={e => {
+                      const newChecklist = [...task.checklist];
+                      newChecklist[index].completed = e.target.checked;
+                      setTask(prevState => ({ ...prevState, checklist: newChecklist }));
+                    }}
+
+                  />
+                  <span className={styles.customCheckbox} style={{ marginTop: "-1rem", marginLeft: "0.5rem" }}></span></label>
+                <input
+                  type="text"
+                  value={item.label}
+                  onChange={e => {
+                    const newChecklist = [...task.checklist];
+                    newChecklist[index].label = e.target.value;
+                    setTask(prevState => ({ ...prevState, checklist: newChecklist }));
+                  }}
+                  className={styles.checklist_input}
+                />
+                <button className={styles.checklist_cross_button} onClick={() => {
+                  const newChecklist = [...task.checklist];
+                  newChecklist.splice(index, 1);
+                  setTask(prevState => ({ ...prevState, checklist: newChecklist }));
+                }}><img src={Delete} style={{ height: "1rem" }} /></button>
+              </div>
+            ))}
+
+
+            <div className={styles.checklist_button} onClick={() => setTask(prevState => ({ ...prevState, checklist: [...prevState.checklist, { label: '', completed: false }] }))}>
+              + Add New
+            </div>
+
+          </div>
+          <div className={styles.footer}>
+            <div className={styles.dueDate_button} onClick={() => { document.getElementById('dateInput').click(); setDatePickerVisible(true); }}>
+              {task.due_date || 'Select Due Date'}
+            </div>
+            <input
+              id="dateInput"
+              type="date"
+              style={{ visibility: isDatePickerVisible ? 'visible' : 'hidden', position: 'absolute' }}
+              value={task.due_date}
+              onChange={e => {
+                setTask(prevState => ({ ...prevState, due_date: e.target.value }));
+                setDatePickerVisible(false);
+              }}
+            />
+            <div className={styles.cancel_save}>
+              <div className={styles.cancel_button} onClick={closeModal}>Cancel</div>
+              <div className={styles.save_button} onClick={saveTask}>Save</div>
+            </div>
+          </div>
+        </div>
+      )}
 
 
     </>

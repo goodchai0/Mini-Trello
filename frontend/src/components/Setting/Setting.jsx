@@ -6,14 +6,14 @@ import man from '../../assets/man.png';
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { updateUser } from '../../apis/auth';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const Setting = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [data, setData] = useState({
-        name: "",
+        name: localStorage.getItem('userName'),
         oldPassword: "",
         newPassword: "",
     });

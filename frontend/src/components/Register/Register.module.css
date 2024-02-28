@@ -49,6 +49,7 @@
 }
 .eye{
     margin-left: 4rem;
+    cursor: pointer;
 }
 
 .button {
@@ -65,6 +66,7 @@
     margin-bottom: 16px;
     margin-top: 2rem;
     width: 28rem;
+    cursor: pointer;
 }
 
 
@@ -92,4 +94,5 @@
     font-weight: 500;
     margin-top: 1rem;
     width: 28rem;
+    cursor: pointer;
 }

@@ -39,6 +39,8 @@
     border: 2px solid #C2C2C2;
     box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.01);
     width: 26rem;
+    /* cursor: pointer; */
+
 }
 .input_box img{
     height:1.5rem;
@@ -70,6 +72,8 @@
     margin-bottom: 16px;
     margin-top: 2rem;
     width: 28rem;
+    cursor: pointer;
+
 }
 
 

@@ -9,13 +9,15 @@
 }
 .selectedPeriod{
   margin: 1rem 1rem 1rem 1rem;
-  outline:none
+  outline:none;
+  cursor: pointer;
 }
 .selectedPeriod option{
   margin: 1rem;
   padding:1rem;
   outline:none;
   border:1px solid white;
+  cursor: pointer;
 }
 
 .header h3{
@@ -46,6 +48,7 @@ select {
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 .task{
     width: 20rem;
@@ -66,6 +69,7 @@ select {
 .task_header img{
     height: 1rem;
     margin-right: 2rem;
+    cursor: pointer;
 }
 .task_div {
     margin:1rem 0.5rem 2rem 0rem;
@@ -182,6 +186,7 @@ select {
     border-color: #4D40551A;
     color: #767575;
     font-size: small;
+    cursor: pointer;
   }
   .checklist_box{
     height: 15rem;
@@ -195,6 +200,7 @@ select {
     color:  #767575;
     padding: 0.5rem 1rem 0.5rem 1rem;
     box-shadow: white;
+    cursor: pointer;
   }
   
   .checklist_input{
@@ -214,6 +220,7 @@ select {
     border: 2px solid white;
     border-radius: 0.2rem;
     background-color: white;
+    cursor: pointer;
   }
   .checklist_field_box{
     border: 1px solid #4D40551A;
@@ -232,6 +239,7 @@ select {
     border:2px solid #E2E2E2;
     color:  #767575;
     padding: 0.5rem 1rem 0.5rem 1rem;
+    cursor: pointer;
   }
   .cancel_button{
     background-color: white;
@@ -242,6 +250,7 @@ select {
     box-shadow: white;
     margin-right: 10px;
     width: 5rem;
+    cursor: pointer;
   }
   .save_button{
     background-color:  #17A2B8;
@@ -250,6 +259,7 @@ select {
     padding: 0.5rem 0rem 0.5rem 2.5rem;
     box-shadow: white;
     width: 5rem;
+    cursor: pointer;
   }
   .cancel_save{
     display: flex;

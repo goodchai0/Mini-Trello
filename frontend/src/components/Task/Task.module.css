@@ -21,6 +21,9 @@
     font-weight: 800;
     padding-bottom: 0rem;
     padding-top: 0rem;
+    cursor: pointer;
+}
+.task_header h6{
 }
 .options_box{
     display: flex;
@@ -36,12 +39,15 @@
     font-family: 'Poppins', sans-serif;
     margin-right: 0.4rem;
     font-weight: 500;
+    cursor: pointer;
 }
 .options_box .delete{
     color: red;
+    cursor: pointer;
 }
 .options_box p{
     margin: 4px;
+    cursor: pointer;
 }
 .checklist_header{
     display: flex;
@@ -58,6 +64,7 @@
     border-radius: 3px;
     font-size: large;
     padding-top:5px;
+    cursor: pointer;
 }
 .checklist_items {
   /* Your existing styles */
@@ -113,6 +120,8 @@
 }
 .footer_progress{
     display: flex;
+    margin-top: 8px;
+    align-items: center;justify-content: center;
 }
 .footer_progress p{
     background-color: #E2E2E2;
@@ -123,17 +132,19 @@
     border-radius: 0.4rem;
     margin: 5px;
     text-align: center;
+    cursor: pointer;
+
 }
 .footer_date{
     background-color:#63C05B;
-    ;
     padding: 5px 3px 4px 3px;
-    width: 3rem;
+    width: 6rem;
     font-size: 8px;
     border-radius: 0.4rem;
-    margin: 5px 50px 5px 5px;
+    margin: 13px 35px 5px 5px;
     text-align: center;
     color: white;
+    height: 0.8rem;
 }
 .invisible{
     visibility: hidden
@@ -159,7 +170,7 @@
       margin-bottom: 1px;
       margin-top: 1rem;
       width: inherit;
-  
+      cursor: pointer;
   }
 
   .modal_button_no{
@@ -177,7 +188,7 @@
     margin-bottom: 1px;
     margin-top: 1rem;
     width: inherit;
-
+    cursor: pointer;
 } 
 .modal {
   position: fixed;
@@ -224,6 +235,7 @@
   border-color: #4D40551A;
   color: #767575;
   font-size: small;
+  cursor: pointer;
 }
 .checklist_box{
   height: 15rem;
@@ -237,6 +249,7 @@
   color:  #767575;
   padding: 0.5rem 1rem 0.5rem 1rem;
   box-shadow: white;
+  cursor: pointer;
 }
 
 .checklist_input{
@@ -256,6 +269,7 @@
   border: 2px solid white;
   border-radius: 0.2rem;
   background-color: white;
+  cursor: pointer;
 }
 .checklist_field_box{
   border: 1px solid #4D40551A;
@@ -274,6 +288,7 @@
   border:2px solid #E2E2E2;
   color:  #767575;
   padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
 }
 .cancel_button{
   background-color: white;
@@ -283,6 +298,7 @@
   padding: 0.5rem 0rem 0.5rem 2.5rem;
   box-shadow: white;
   margin-right: 10px;
+  cursor: pointer;
   width: 5rem;
 }
 .save_button{
@@ -291,6 +307,7 @@
   color:  rgb(255, 255, 255);
   padding: 0.5rem 0rem 0.5rem 2.5rem;
   box-shadow: white;
+  cursor: pointer;
   width: 5rem;
 }
 .cancel_save{
