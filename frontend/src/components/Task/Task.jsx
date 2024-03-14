@@ -207,9 +207,9 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
                 task?.due_date ? "" : styles.invisible
               } ${
                   date > Date.now() && task.status !== "done"
-                  ? styles.alert
-                  : date < Date.now() && task.status !== "done"
                   ? styles.overdue
+                  : date < Date.now() && task.status !== "done"
+                  ? styles.alert
                   : task.status === "done"
                   ? styles.completed
                   : ""
