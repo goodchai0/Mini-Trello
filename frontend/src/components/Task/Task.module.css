@@ -136,14 +136,14 @@
 
 }
 .footer_date{
-    background-color:#63C05B;
+    background-color: #EEECEC;
     padding: 5px 3px 4px 3px;
     width: 6rem;
     font-size: 8px;
     border-radius: 0.4rem;
     margin: 13px 35px 5px 5px;
     text-align: center;
-    color: white;
+    color:  #767575;
     height: 0.8rem;
 }
 .invisible{
@@ -151,9 +151,16 @@
 }
 .alert{
     background-color: #CF3636;
-    ;
+    color: white;
 }
-
+.overdue{
+  background-color: #DBDBDB;
+  color: #5A5A5A
+}
+.completed{
+  background-color:#63C05B;
+  color: white;
+}
 
   .modal_button_yes{
 
@@ -427,4 +434,12 @@
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
-  
+  .darkOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Ensure it covers everything */
+  }

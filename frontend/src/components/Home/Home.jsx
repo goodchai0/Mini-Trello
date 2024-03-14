@@ -84,6 +84,12 @@ export const Home = () => {
       return;
     }
 
+      // Check if any checklist item label is empty
+    const emptyChecklistItem = task.checklist.find(item => item.label.trim() === "");
+    if (emptyChecklistItem) {
+      toast.error('One of Checklist item is empty.');
+      return;
+    }
 
     // Call your API function here
     const response = await createTask(task);
@@ -118,6 +124,7 @@ export const Home = () => {
 
   return (
     <>
+    {modalIsOpen && <div className={styles.darkOverlay} />}
       <div className={styles.header}>
         <h2>Welcome! {name}</h2>
         <h3>{formatDate(Date.now())}</h3>

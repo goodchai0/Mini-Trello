@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from "./Setting.module.css";
 import password from '../../assets/password.png';
 import eye from '../../assets/eye.png';
+import hide from '../../assets/hide.svg';
 import man from '../../assets/man.png';
 import { useNavigate } from "react-router";
 import { useState } from "react";
@@ -34,7 +35,7 @@ const Setting = () => {
             }
         } catch (error) {
             console.error("Error updating profile:", error);
-            toast.error("Failed to update profile. Please try again later.");
+            toast.error("Failed to update profile. Check your details (old password)");
         }
     };
 
@@ -76,7 +77,7 @@ const Setting = () => {
                             type={showPassword ? "text" : "password"}
                             placeholder="Old Password"
                         />
-                        <img src={eye} alt="Toggle Password Visibility" className={styles.eye} onClick={() => setShowPassword(!showPassword)} />
+                        <img src={showPassword ? hide : eye} alt="Toggle Password Visibility" className={styles.eye} onClick={() => setShowPassword(!showPassword)} />
                     </div>
                     <div className={styles.input_box}>
                         <img src={password} alt="Password" />
@@ -88,7 +89,7 @@ const Setting = () => {
                             type={showNewPassword ? "text" : "password"}
                             placeholder="New Password"
                         />
-                        <img src={eye} alt="Toggle Password Visibility" className={styles.eye} onClick={() => setShowNewPassword(!showNewPassword)} />
+                        <img src={showNewPassword ? hide : eye} alt="Toggle Password Visibility" className={styles.eye} onClick={() => setShowNewPassword(!showNewPassword)} />
                     </div>
                     <button onClick={handleSubmit} className={styles.button}>
                         Update

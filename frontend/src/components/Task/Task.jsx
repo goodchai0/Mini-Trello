@@ -17,7 +17,6 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [items, setItems] = useState(checklistItems);
   const [showOptions, setShowOptions] = useState(false);
-
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);  // // To update the state, you can do:
   const [selectedPriority, setSelectedPriority] = useState(task.priority);
 
@@ -28,6 +27,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
       if (!token) {
           navigate("/login");
       }
+      console.log(task)
   }, []);
 
   const openModal = () => {
@@ -49,8 +49,16 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
       toast.error('Checklist should not be empty.');
       return;
     }
-    const response = await updateTask({id:task._id, body:{...task}});
 
+    // Check if any checklist item label is empty
+    const emptyChecklistItem = task.checklist.find(item => item.label.trim() === "");
+    if (emptyChecklistItem) {
+      toast.error('One of Checklist item is empty.');
+      return;
+    }
+
+    const response = await updateTask({id:task._id, body:{...task}});
+    setItems(task.checklist)
     if (response.success) {
       toast.success("Task Updated Successfully");
     } else {
@@ -69,8 +77,6 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
     setTask(prevState => ({ ...prevState, priority }));
     setSelectedPriority(priority);
   };
-
-
   const handleShareClick = () => {
     toggleOptions()
     const url = window.location.href + task._id;
@@ -154,6 +160,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
   
   return (
     <div className={styles.main}>
+      {modalIsOpen && <div className={styles.darkOverlay} />}
       <div className={styles.task_header}>
         <h6><span className={styles.task_header_picon}><img src={dot_color}/></span>   {task?.priority} Priority</h6>
         <h4 onClick={toggleOptions}>. . .</h4>
@@ -194,9 +201,21 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
        
        <div className={styles.footer}>
         
-          <div className={`${styles.footer_date} ${task?.due_date ? "" : styles.invisible} ${date > Date.now() ? styles.alert : ""}`}>
-            {formatted_due_date}
-          </div>
+          <div
+              className={`${styles.footer_date} ${
+                task?.due_date ? "" : styles.invisible
+              } ${
+                  date > Date.now() && task.status !== "done"
+                  ? styles.alert
+                  : date < Date.now() && task.status !== "done"
+                  ? styles.overdue
+                  : task.status === "done"
+                  ? styles.completed
+                  : ""
+              }`}
+            >
+              {formatted_due_date}
+            </div>
 
           <div className={styles.footer_progress}>
             {task?.status !== 'progress' && <p onClick={() => {updateTask({id:task._id, body:{status:'progress'}}), setReload(!reload)}}>PROGRESS</p>}

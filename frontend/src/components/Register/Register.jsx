@@ -5,6 +5,7 @@ import { registerUser } from "../../apis/auth";
 import email from '../../assets/email.png';
 import password from '../../assets/password.png';
 import eye from '../../assets/eye.png';
+import hide from '../../assets/hide.svg';
 import man from '../../assets/man.png';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -30,6 +31,12 @@ const Register = () => {
             toast.error("Please fill in all fields.");
             return;
         }
+
+        if (!validateEmail(data.email)) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+
         if (data.confirm_password !== data.password) { // Check password confirmation
             toast.error("Confirm password and password don't match.");
             return;
@@ -51,6 +58,12 @@ const Register = () => {
 
     const redirectToLoginPage = () => {
         navigate("/login");
+    };
+
+    // Email format validation function
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
     };
 
     return (
@@ -90,7 +103,7 @@ const Register = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                 />
-                <img src={eye} className={styles.eye} alt="eye" onClick={() => setShowPassword(!showPassword)} />
+                <img src={showPassword ? hide : eye} className={styles.eye} alt="eye" onClick={() => setShowPassword(!showPassword)} />
             </div>
             
             <div className={styles.input_box}>
@@ -103,7 +116,7 @@ const Register = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm Password"
                 />
-                <img src={eye} className={styles.eye} alt="eye" onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
+                <img src={showConfirmPassword ? hide : eye} className={styles.eye} alt="eye" onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
             </div>
 
             <button onClick={handleSubmit} className={styles.button}>

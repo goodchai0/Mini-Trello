@@ -5,6 +5,7 @@ import { loginUser } from "../../apis/auth";
 import email from '../../assets/email.png';
 import password from '../../assets/password.png';
 import eye from '../../assets/eye.png';
+import hide from '../../assets/hide.svg';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -61,7 +62,8 @@ export const Login = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
             />
-            <img src={eye} className={styles.eye} onClick={() => setShowPassword(!showPassword)} />
+            <img src={showPassword ? hide : eye} className={styles.eye} alt="eye" onClick={() => setShowPassword(!showPassword)} />
+
         </div>
             <button onClick={handleSubmit} className={styles.button}>
                 Login in
