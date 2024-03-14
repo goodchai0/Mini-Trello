@@ -46,6 +46,7 @@ export const RightBar = ({ selected }) => {
   };
   return (
     <>
+      {confirmLogout && <div className={styles.darkOverlay} />}
       <div className={styles.right_up}>
         <img src={codesandbox} />
         <h5>Pro Manage</h5>

@@ -161,6 +161,7 @@ export const Task = ({ initialTask, checklistItems,setReload,reload,toggling}) =
   return (
     <div className={styles.main}>
       {modalIsOpen && <div className={styles.darkOverlay} />}
+      {confirmDelete && <div className={styles.darkOverlay} />}
       <div className={styles.task_header}>
         <h6><span className={styles.task_header_picon}><img src={dot_color}/></span>   {task?.priority} Priority</h6>
         <h4 onClick={toggleOptions}>. . .</h4>
